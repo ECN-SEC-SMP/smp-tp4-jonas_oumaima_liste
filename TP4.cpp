@@ -16,7 +16,11 @@ int main(){
 
 
     personne personnetest1 = genererPersonne();
-    personne personnetest2 = genererPersonne();
+    personne personnetest2;
+    
+    personnetest2.nom = "David";
+    personnetest2.prenom = "akny";
+    personnetest2.tel = "0307214235";
 
     cout << endl;
     cout << "Egalité entre deux personne : " << endl;
@@ -49,18 +53,27 @@ int main(){
 
     elementListe *liste = creerElementListe(personnetest1);
 
-    liste = ajouter(personnetest2, liste);
+    for (int i = 0; i < 5 ; i++){
+        liste = ajouter(genererPersonne(),liste);
+    }
 
+    liste = ajouter(personnetest2,liste);
+    
     affichage(liste);
-
-
-
     
 
     cout << endl;
-    cout << "Comparaison entre deux personnes : " << endl;
+    cout << "Recherche d'une personne : " << endl;
     cout << endl; 
 
+    cout << "David est a la " << recherche(personnetest2,liste) << " position"<<endl;
+
+    cout << "Suppression de David" << endl;
+    cout << endl;
+
+    liste = supprimer(personnetest2,liste);
+
+    affichage(liste);
 
 
 }

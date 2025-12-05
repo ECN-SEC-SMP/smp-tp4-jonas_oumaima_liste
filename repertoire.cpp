@@ -34,8 +34,6 @@ elementListe * ajouter(personne personne, elementListe* liste) {
         precedent = courant;
         courant = courant->suivant;
     }
-
-    // Insertion en fin de liste
     precedent->suivant = nouveau;
     return liste;
 }
@@ -46,7 +44,39 @@ void affichage(elementListe *liste){
         cout << "Liste vide" << endl;
     }
     while(liste != nullptr){
-        cout << liste->pers.nom + ", " << liste->pers.prenom + ", "<< liste->pers.tel << " ; " << endl;
+        cout << "[" + liste->pers.nom + ", " << liste->pers.prenom + ", "<< liste->pers.tel << "]" << endl;
         liste = liste->suivant;
     }
+}
+
+
+int recherche(personne personne, elementListe *liste){
+    int i = 1;
+    elementListe *courant = liste;
+
+    while(courant!=nullptr){
+        if (egalitePersonne(courant->pers, personne)){
+            return i;
+        }
+        else{
+            i++;
+            courant = courant->suivant;
+        }  
+    }
+    return -1;
+}
+
+
+elementListe *supprimer(personne personne, elementListe *liste){
+    elementListe *courant = liste;
+    while(courant!=nullptr){
+        if(egalitePersonne(personne, courant->pers)){
+            courant = nullptr;
+            return liste;   
+        }
+        else{
+            courant = courant->suivant;
+        }
+    }
+    return liste;
 }
