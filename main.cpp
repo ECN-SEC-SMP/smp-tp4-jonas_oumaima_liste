@@ -13,11 +13,11 @@
 using namespace std;
 
 
-int main(){
+// int main(){
     
-    string nom = genererNomPrenom("Noms_TP4.txt", 1000);
-    string prenom = genererNomPrenom("Prenoms_TP4.txt", 11612);
-    string tel = genererTel();
-    cout<< nom<<" "<<prenom<<" "<<tel<<endl;
-    return 0;
-}
+//    string nom = genererNomPrenom("Noms_TP4.txt", 1000);
+//    string prenom = genererNomPrenom("Prenoms_TP4.txt", 11612);
+//    string tel = genererTel();
+//    cout<< nom<<" "<<prenom<<" "<<tel<<endl;
+//    return 0;
+//}
