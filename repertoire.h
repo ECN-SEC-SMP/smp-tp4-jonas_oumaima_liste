@@ -57,9 +57,9 @@ Paramètres d'entrées :
 - Une personne
 - Une liste
 
-Elle retourne la tête de la liste dont la personne a été supprimée
+Elle retourne la tête de la liste sans personne a supprimée
 */
-elementListe *supprimer(personne personne, elementListe *liste);
+elementListe *supprimerListe(personne personne, elementListe *liste);
 
 /*Fonction permette d'ajouter une personne au bon endroit d'un tableau
 
@@ -71,5 +71,14 @@ Parametres  d'entrées :
 Elle retourne le tableau avec la personne ajouter
 */
 elementTableau ajouterTab(personne personne, elementTableau tab);
+/*Fonction permettant de supprimer une personne au bon endroit du tableau
+
+Paramètres d'entrées :
+- Une personne
+- Un tableau
+
+Elle retourne le tableau sans la personne supprimée
+*/
+elementTableau supprimerTab(personne personne, elementTableau tab);
 
 #endif

@@ -107,7 +107,7 @@ int rechercheTab(personne personne, elementTableau tab){
 }
 
 
-elementListe *supprimer(personne personne, elementListe *liste){
+elementListe *supprimerListe(personne personne, elementListe *liste){
     elementListe *courant = liste; // creation du pointeur pour avancer dans la liste
     elementListe *precedent = nullptr; // creation du pointeur de l'element precedent de la liste
 
@@ -131,4 +131,18 @@ elementListe *supprimer(personne personne, elementListe *liste){
     }
     // renvoie de la liste si l'element a supprimer n'existe pas 
     return liste;
+}
+
+elementTableau supprimerTab(personne personne, elementTableau tab){
+    int pos = rechercheTab(personne, tab);
+
+    if(pos == -1){
+        return tab;
+    }
+
+    for(int i = pos; i < tab.taille; i++){
+                tab.pers[i] = tab.pers[i+1];
+    }
+    tab.taille--;
+    return tab;
 }

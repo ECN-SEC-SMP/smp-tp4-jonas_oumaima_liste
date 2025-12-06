@@ -1,3 +1,4 @@
+#include <ctime>
 #include <iostream>
 #include "utilitaires.h"
 #include "utilitaire_generation.h"
@@ -51,16 +52,24 @@ int main(){
     cout << "Affichage de la liste : " << endl;
     cout << endl;
 
-    elementListe *liste = creerElementListe(personnetest1);
-
-    for (int i = 0; i < 5 ; i++){
-        liste = ajouterListe(genererPersonne(),liste);
+    // Mesure création répertoire liste
+    clock_t start = clock();
+    elementListe* liste = nullptr;
+    for(int i = 0; i < 1000; i++) {
+        liste = ajouterListe(genererPersonne(), liste);
     }
+    clock_t end = clock();
+    std::cout << "Temps création liste : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
 
-    liste = ajouterListe(personnetest2,liste);
-    
-    affichageListe(liste);
-    
+    // Mesure création répertoire tableau
+    start = clock();
+    elementTableau tableau;
+    tableau.taille = 0;
+    for(int i = 0; i < 1000; i++) {
+        tableau = ajouterTab(genererPersonne(), tableau);
+    }
+    end = clock();
+    std::cout << "Temps création tableau : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
 
     cout << endl;
     cout << "Recherche d'une personne : " << endl;
@@ -72,24 +81,13 @@ int main(){
     cout << "Suppression de David" << endl;
     cout << endl;
 
-    liste = supprimer(personnetest2,liste);
+    liste = supprimerListe(personnetest2,liste);
 
     affichageListe(liste);
 
     cout << endl;
     cout << "Test des tableau : " << endl;
     cout << endl;
-
-    elementTableau tableau;
-    tableau.taille = 0;
-
-    for(int i = 0; i < 7 ; i++){
-        tableau = ajouterTab(genererPersonne(),tableau);
-    }
-    
-    tableau = ajouterTab(personnetest2,tableau);
-
-    affichageTab(tableau);
 
 
     cout << endl;
@@ -98,6 +96,58 @@ int main(){
 
     cout << "David est a la " << rechercheTab(personnetest2, tableau) << " position"<<endl;
 
+    cout << endl;
+    cout << "Suppression de David" << endl;
+    cout << endl;
     
+    tableau = supprimerTab(personnetest2,tableau);
+
+    affichageTab(tableau);
+
+    // Mesure affichage liste
+    start = clock();
+    affichageListe(liste);
+    end = clock();
+    std::cout << "Temps affichage liste : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+
+    // Mesure affichage tableau
+    start = clock();
+    affichageTab(tableau);
+    end = clock();
+    std::cout << "Temps affichage tableau : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+
+    // Mesure recherche de 100 personnes
+    start = clock();
+    for(int i = 0; i < 100; i++) {
+        personne p = genererPersonne();
+        rechercheListe(p, liste);
+    }
+    end = clock();
+    std::cout << "Temps recherche 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+
+    start = clock();
+    for(int i = 0; i < 100; i++) {
+        personne p = genererPersonne();
+        rechercheTab(p, tableau);
+    }
+    end = clock();
+    std::cout << "Temps recherche 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+
+    // Mesure suppression de 100 personnes
+    start = clock();
+    for(int i = 0; i < 100; i++) {
+        personne p = genererPersonne();
+        liste = supprimerListe(p, liste);
+    }
+    end = clock();
+    std::cout << "Temps suppression 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+
+    start = clock();
+    for(int i = 0; i < 100; i++) {
+        personne p = genererPersonne();
+        tableau = supprimerTab(p, tableau);
+    }
+    end = clock();
+    std::cout << "Temps suppression 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
 
 }
