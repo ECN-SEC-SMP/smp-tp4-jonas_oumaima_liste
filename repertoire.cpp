@@ -69,14 +69,23 @@ int recherche(personne personne, elementListe *liste){
 
 elementListe *supprimer(personne personne, elementListe *liste){
     elementListe *courant = liste;
+    elementListe *precedent = nullptr;
+
     while(courant!=nullptr){
         if(egalitePersonne(personne, courant->pers)){
-            courant = nullptr;
-            return liste;   
+            if(precedent == nullptr){
+                liste = courant->suivant;
+                delete courant;
+                return liste;
+            }
+            else{
+                precedent->suivant = courant->suivant;
+                delete courant;
+                return liste;
+            }
         }
-        else{
-            courant = courant->suivant;
-        }
+        precedent = courant;
+        courant = courant->suivant;
     }
     return liste;
 }

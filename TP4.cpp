@@ -68,6 +68,7 @@ int main(){
 
     cout << "David est a la " << recherche(personnetest2,liste) << " position"<<endl;
 
+    cout << endl;
     cout << "Suppression de David" << endl;
     cout << endl;
 
