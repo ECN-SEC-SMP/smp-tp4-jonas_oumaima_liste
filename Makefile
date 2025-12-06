@@ -24,4 +24,4 @@ $(TARGET): $(OBJS)
 
 clean:
 	@echo "Nettoyage..."
-	rm -f $(OBJS) $(TARGET) $(TARGET).exe érodée* dilatée* seuillée*
+	rm -f $(OBJS) $(TARGET) $(TARGET).exe 
