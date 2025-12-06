@@ -42,14 +42,22 @@ elementListe * ajouterListe(personne personne, elementListe* liste) {
 
 elementTableau ajouterTab(personne personne, elementTableau tab){
     for(int i = 0; i < tab.taille; i++){
+        if(egalitePersonne(personne, tab.pers[i])){
+            return tab; 
+        }
+        
         if(comparerPersonne(personne, tab.pers[i])){
-            for(int k = 0; k < taillemax; k++){
-                tab.pers[k+i] = tab.pers[k+i+1];
-                tab.pers[i] = personne;
+            for(int j = tab.taille; j > i; j--){
+                tab.pers[j] = tab.pers[j-1];
             }
+            tab.pers[i] = personne;
+            tab.taille++;
+            return tab;
         }
     }
-    tab.pers[tab.taille + 1];
+    
+    tab.pers[tab.taille] = personne;
+    tab.taille++;
     return tab;
 }
 

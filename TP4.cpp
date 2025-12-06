@@ -80,7 +80,13 @@ int main(){
     cout << "Test des tableau : " << endl;
     cout << endl;
 
+    elementTableau tableau;
+    tableau.taille = 0;
 
-
+    for(int i = 0; i < 7 ; i++){
+        tableau = ajouterTab(genererPersonne(),tableau);
+    }
+    
+    affichageTab(tableau);
 
 }
