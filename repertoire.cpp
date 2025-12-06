@@ -5,7 +5,7 @@
 using namespace std;
 
 
-elementListe * ajouter(personne personne, elementListe* liste) {
+elementListe * ajouterListe(personne personne, elementListe* liste) {
     elementListe* nouveau = creerElementListe(personne);
 
     if (liste == nullptr) { // si la liste en entree est vide
@@ -40,8 +40,20 @@ elementListe * ajouter(personne personne, elementListe* liste) {
     return liste; // renvoie de la tete de liste
 }
 
+elementTableau ajouterTab(personne personne, elementTableau tab){
+    for(int i = 0; i < tab.taille; i++){
+        if(comparerPersonne(personne, tab.pers[i])){
+            for(int k = 0; k < taillemax; k++){
+                tab.pers[k+i] = tab.pers[k+i+1];
+                tab.pers[i] = personne;
+            }
+        }
+    }
+    tab.pers[tab.taille + 1];
+    return tab;
+}
 
-void affichage(elementListe *liste){
+void affichageListe(elementListe *liste){
     elementListe *courant = liste; // creation du pointeur pour avancer dans la liste
 
     if (liste == nullptr){ // si la liste a afficher est vide
@@ -49,8 +61,14 @@ void affichage(elementListe *liste){
     }
     while(courant != nullptr){ // tant que l'element de la liste n'est pas vide
         // affichage de la liste
-        cout << "[" + courant->pers.nom + ", " << courant->pers.prenom + ", "<< courant->pers.tel << "]" << endl;
+        affichagePersonne(courant->pers);
         courant = courant->suivant; // parcours de la liste
+    }
+}
+
+void affichageTab(elementTableau tab){
+    for(int i=0; i < tab.taille; i++){
+        affichagePersonne(tab.pers[i]);
     }
 }
 

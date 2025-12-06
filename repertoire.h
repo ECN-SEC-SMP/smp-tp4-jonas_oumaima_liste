@@ -13,7 +13,7 @@ Paramètres d'entrées :
 
 Elle retourne la tête de la liste dont la personne a été ajoutée
 */
-elementListe *ajouter(personne personne, elementListe *liste);
+elementListe *ajouterListe(personne personne, elementListe *liste);
 
 /*Fonction permettant d'afficher une liste
 
@@ -22,7 +22,17 @@ Paramètre d'entrée :
 
 Elle retourne rien mais affiche a l'écran la liste
 */
-void affichage(elementListe *liste);
+void affichageListe(elementListe *liste);
+
+/*Fonction permettant d'afficher un tableau
+
+Paramètre d'entrée :
+- Un tableau 
+
+
+Elle retourne rien mais affiche a l'écran le tableau
+*/
+void affichageTab(elementTableau tab);
 /*Fonction permettant de rechercher une personne dans une liste et de déterminer sa position
 
 Paramètres d'entrées :
@@ -42,5 +52,15 @@ Elle retourne la tête de la liste dont la personne a été supprimée
 */
 elementListe *supprimer(personne personne, elementListe *liste);
 
+/*Fonction permette d'ajouter une personne au bon endroit d'un tableau
+
+Parametres  d'entrées : 
+
+- Une personne
+- Un tableau
+
+Elle retourne le tableau avec la personne ajouter
+*/
+elementTableau ajouterTab(personne personne, elementTableau tab);
 
 #endif

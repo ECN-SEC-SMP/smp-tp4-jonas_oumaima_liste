@@ -21,9 +21,7 @@ elementListe *creerElementListe(personne personne){
 }
 
 void affichagePersonne(personne personne){
-    cout << "Nom : " << personne.nom <<endl; // affichage du nom de la personne
-    cout << "Prénom : " << personne.prenom << endl; // affichage du prenom de la personne
-    cout << "Téléphone : " << personne.tel << endl; // affichage du numero de telephone de la personne
+    cout << "[" + personne.nom + ", " << personne.prenom + ", "<< personne.tel << "]" << endl;
 }
 
 bool egalitePersonne(personne personne1, personne personne2){

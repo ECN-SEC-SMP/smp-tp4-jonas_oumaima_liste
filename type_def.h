@@ -15,4 +15,12 @@ struct elementListe{
     elementListe *suivant;
 };
 
+/*Définition d'un tableau*/
+
+const int taillemax = 1000;
+
+struct elementTableau{
+    personne pers[taillemax];
+    int taille;
+};
 #endif

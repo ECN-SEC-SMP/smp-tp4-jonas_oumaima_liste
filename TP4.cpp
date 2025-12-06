@@ -54,12 +54,12 @@ int main(){
     elementListe *liste = creerElementListe(personnetest1);
 
     for (int i = 0; i < 5 ; i++){
-        liste = ajouter(genererPersonne(),liste);
+        liste = ajouterListe(genererPersonne(),liste);
     }
 
-    liste = ajouter(personnetest2,liste);
+    liste = ajouterListe(personnetest2,liste);
     
-    affichage(liste);
+    affichageListe(liste);
     
 
     cout << endl;
@@ -74,7 +74,13 @@ int main(){
 
     liste = supprimer(personnetest2,liste);
 
-    affichage(liste);
+    affichageListe(liste);
+
+    cout << endl;
+    cout << "Test des tableau : " << endl;
+    cout << endl;
+
+
 
 
 }
