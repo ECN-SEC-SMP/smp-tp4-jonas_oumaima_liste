@@ -8,84 +8,92 @@ using namespace std;
 elementListe * ajouter(personne personne, elementListe* liste) {
     elementListe* nouveau = creerElementListe(personne);
 
-    if (liste == nullptr) {
-        return nouveau;
+    if (liste == nullptr) { // si la liste en entree est vide
+        return nouveau; // renvoie de l'element cree
     }
 
-    elementListe* courant = liste;
-    elementListe* precedent = nullptr;
+    elementListe* courant = liste; // creation du pointeur pour bouger dans la liste
+    elementListe* precedent = nullptr; // creation du pointeur de l'element precedent de la liste
 
-    while (courant != nullptr) {
-        if (egalitePersonne(personne, courant->pers)) {
-            delete nouveau;
-            return liste;
+    while (courant != nullptr) { // parcours de la liste
+        if (egalitePersonne(personne, courant->pers)) { // si la personne est deja dans la liste
+            delete nouveau; // liberation de la memoire 
+            return liste; // renvoie de la liste sans la modifier
         }
-        if (comparerPersonne(personne, courant->pers)) {
-            if (precedent == nullptr) {
-                nouveau->suivant = liste;
-                return nouveau; 
+        if (comparerPersonne(personne, courant->pers)) { // si "personne" passe avant "courant->pers"
+            if (precedent == nullptr) { // on verifie si on est en tete de liste (oui si le precedent est null)
+                nouveau->suivant = liste; // dans ce cas l'element cree devient la tete de liste
+                return nouveau; // renvoie de la nouvelle tete de liste
             } 
-            else {
-                precedent->suivant = nouveau;
+            else { // si on ce trouve apres la tete de liste
+                // insertion du nouvel element entre l'element precedent et l'element courant
+                precedent->suivant = nouveau; 
                 nouveau->suivant = courant;
-                return liste;
+                return liste; // renvoie de la tete de liste 
             }
         }
-        precedent = courant;
+        // avancement dans la liste
+        precedent = courant; 
         courant = courant->suivant;
-    }
-    precedent->suivant = nouveau;
-    return liste;
+    } // si l'element de la liste ne trouve pas de place avant le dernier element
+    precedent->suivant = nouveau; // ajout du nouvel element a la fin de la liste 
+    return liste; // renvoie de la tete de liste
 }
 
 
 void affichage(elementListe *liste){
-    if (liste == nullptr){
-        cout << "Liste vide" << endl;
+    elementListe *courant = liste; // creation du pointeur pour avancer dans la liste
+
+    if (liste == nullptr){ // si la liste a afficher est vide
+        cout << "Liste vide" << endl; 
     }
-    while(liste != nullptr){
-        cout << "[" + liste->pers.nom + ", " << liste->pers.prenom + ", "<< liste->pers.tel << "]" << endl;
-        liste = liste->suivant;
+    while(courant != nullptr){ // tant que l'element de la liste n'est pas vide
+        // affichage de la liste
+        cout << "[" + courant->pers.nom + ", " << courant->pers.prenom + ", "<< courant->pers.tel << "]" << endl;
+        courant = courant->suivant; // parcours de la liste
     }
 }
 
 
 int recherche(personne personne, elementListe *liste){
-    int i = 1;
-    elementListe *courant = liste;
+    int i = 1; // initialisation de la position de l'element dans la liste 
+    elementListe *courant = liste;  // creation du pointeur pour avancer dans la liste
 
     while(courant!=nullptr){
-        if (egalitePersonne(courant->pers, personne)){
-            return i;
+        if (egalitePersonne(courant->pers, personne)){ // si on trouve l'element rechercher
+            return i; // renvoie l'indice de l'element 
         }
         else{
-            i++;
-            courant = courant->suivant;
+            i++; // incrementation de l'indice de l'element
+            courant = courant->suivant; // parcours de la liste
         }  
     }
-    return -1;
+    return -1; // si l'element n'est pas dans la liste
 }
 
 
 elementListe *supprimer(personne personne, elementListe *liste){
-    elementListe *courant = liste;
-    elementListe *precedent = nullptr;
+    elementListe *courant = liste; // creation du pointeur pour avancer dans la liste
+    elementListe *precedent = nullptr; // creation du pointeur de l'element precedent de la liste
 
     while(courant!=nullptr){
-        if(egalitePersonne(personne, courant->pers)){
-            if(precedent == nullptr){
-                liste = courant->suivant;
-                delete courant;
-                return liste;
+        if(egalitePersonne(personne, courant->pers)){ // si on trouve la personne
+            if(precedent == nullptr){  // si cette personne ce trouve a la tete de liste
+                liste = courant->suivant; // la tete de liste devient la le second element de la liste
+                delete courant; // liberation de la memoire
+                return liste; // renvoie de la nouvelle tete de liste
             }
-            else{
-                precedent->suivant = courant->suivant;
-                delete courant;
-                return liste;
+            else{ // si cette personne ce trouve apres la tete de liste
+        // on relie l'element avant celui qu'on veut supprimer a celui apres celui qu'on veut supprimer
+                precedent->suivant = courant->suivant; 
+                delete courant; // liberation de la memoire
+                return liste; // renvoie de la tete de liste
             }
         }
-        precedent = courant;
+        // deplacement dans la liste
+        precedent = courant; 
         courant = courant->suivant;
     }
+    // renvoie de la liste si l'element a supprimer n'existe pas 
     return liste;
 }
