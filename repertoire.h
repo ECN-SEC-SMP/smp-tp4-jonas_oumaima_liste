@@ -41,7 +41,16 @@ Paramètres d'entrées :
 
 Elle retourne la position de la personne dans la liste
 */
-int recherche(personne personne, elementListe *liste);
+int rechercheListe(personne personne, elementListe *liste);
+/*Fonction permettant de rechercher une personne dans une liste et de déterminer sa position
+
+Paramètres d'entrées :
+- Une personne
+- Un tableau
+
+Elle retourne la position de la personne dans la liste
+*/
+int rechercheTab(personne personne, elementTableau tab);
 /*Fonction permettant de supprimer une personne au bon endroit
 
 Paramètres d'entrées :

@@ -66,7 +66,7 @@ int main(){
     cout << "Recherche d'une personne : " << endl;
     cout << endl; 
 
-    cout << "David est a la " << recherche(personnetest2,liste) << " position"<<endl;
+    cout << "David est a la " << rechercheListe(personnetest2,liste) << " position"<<endl;
 
     cout << endl;
     cout << "Suppression de David" << endl;
@@ -87,6 +87,17 @@ int main(){
         tableau = ajouterTab(genererPersonne(),tableau);
     }
     
+    tableau = ajouterTab(personnetest2,tableau);
+
     affichageTab(tableau);
+
+
+    cout << endl;
+    cout << "Recherche dans le tableau : " << endl;
+    cout << endl;
+
+    cout << "David est a la " << rechercheTab(personnetest2, tableau) << " position"<<endl;
+
+    
 
 }

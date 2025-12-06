@@ -81,8 +81,8 @@ void affichageTab(elementTableau tab){
 }
 
 
-int recherche(personne personne, elementListe *liste){
-    int i = 1; // initialisation de la position de l'element dans la liste 
+int rechercheListe(personne personne, elementListe *liste){
+    int i = 0; // initialisation de la position de l'element dans la liste 
     elementListe *courant = liste;  // creation du pointeur pour avancer dans la liste
 
     while(courant!=nullptr){
@@ -95,6 +95,15 @@ int recherche(personne personne, elementListe *liste){
         }  
     }
     return -1; // si l'element n'est pas dans la liste
+}
+
+int rechercheTab(personne personne, elementTableau tab){
+    for (int i = 0; i < tab.taille; i++){
+        if (egalitePersonne(personne, tab.pers[i])){
+            return i;
+        }
+    }
+    return -1;
 }
 
 
