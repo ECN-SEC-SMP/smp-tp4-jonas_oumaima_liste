@@ -152,4 +152,5 @@ int main(){
     end = clock();
     cout << "Temps suppression 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << endl;
 
+    delete liste;
 }
