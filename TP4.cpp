@@ -1,20 +1,13 @@
 #include <ctime>
 #include <iostream>
-#include "utilitaires.h"
-#include "utilitaire_generation.h"
-#include "repertoire.h"
+#include "utilitaires/utilitaires.h"
+#include "utilitaire_generation/utilitaire_generation.h"
+#include "repertoire/repertoire.h"
 #include "type_def.h"
-
+    
 using namespace std;
 
 int main(){
-
-    cout << endl;
-    cout << "Affichage d'une personne aléatoire" << endl;
-    cout << endl;
-
-    affichagePersonne(genererPersonne());
-
 
     personne personnetest1 = genererPersonne();
     personne personnetest2;
@@ -22,6 +15,53 @@ int main(){
     personnetest2.nom = "David";
     personnetest2.prenom = "akny";
     personnetest2.tel = "0307214235";
+
+    clock_t start = clock();
+    elementListe* liste = nullptr;
+    for(int i = 0; i < 999; i++) {
+        liste = ajouterListe(genererPersonne(), liste);
+    }
+    liste = ajouterListe(personnetest2,liste);
+    clock_t end = clock();
+
+    double tempscreationliste = double(end - start) / CLOCKS_PER_SEC;
+
+    start = clock();
+    elementTableau tableau;
+    tableau.taille = 0;
+    for(int i = 0; i < 999; i++) {
+        tableau = ajouterTab(genererPersonne(), tableau);
+    }
+    tableau = ajouterTab(personnetest2,tableau);
+    end = clock();
+
+    double tempscreationtab = double(end - start) / CLOCKS_PER_SEC;
+
+    start = clock();
+    affichageListe(liste);
+    end = clock();
+
+    double tempsaffliste = double(end - start)/ CLOCKS_PER_SEC;
+
+    start = clock();
+    affichageTab(tableau);
+    end = clock();
+
+    double tempsafftab = double(end - start)/ CLOCKS_PER_SEC;
+
+    cout << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "Tests des utilitaires" << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << endl;
+
+    cout << endl;
+    cout << "Affichage d'une personne aléatoire" << endl;
+    cout << endl;
+
+    cout <<endl;
+    affichagePersonne(genererPersonne());
+
 
     cout << endl;
     cout << "Egalité entre deux personne : " << endl;
@@ -47,83 +87,45 @@ int main(){
     else{
         cout << personnetest1.nom << " est après " << personnetest2.nom <<endl;
     }
-    
+
+
+
+
+
     cout << endl;
-    cout << "Affichage de la liste : " << endl;
+    cout << "----------------------------------------------------" << endl;
+    cout << "Comparaison temporelles entre tableau et liste" << endl;
+    cout << "----------------------------------------------------" << endl;
     cout << endl;
 
-    // Mesure création répertoire liste
-    clock_t start = clock();
-    elementListe* liste = nullptr;
-    for(int i = 0; i < 1000; i++) {
-        liste = ajouterListe(genererPersonne(), liste);
-    }
-    clock_t end = clock();
-    std::cout << "Temps création liste : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
 
-    // Mesure création répertoire tableau
-    start = clock();
-    elementTableau tableau;
-    tableau.taille = 0;
-    for(int i = 0; i < 1000; i++) {
-        tableau = ajouterTab(genererPersonne(), tableau);
-    }
-    end = clock();
-    std::cout << "Temps création tableau : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+    cout << endl;
+    cout << "Temps de création pour d'une liste / tableau de 1000 personne : " << endl;
+    cout << endl;
+
+    cout << "Temps création liste : " << tempscreationliste << " s" << endl;
+    cout << "Temps création tableau : " << tempscreationtab << " s" << endl;
+
+
+    cout << endl;
+    cout << "Temps d'affichage : " << endl;
+    cout << endl;
+
+    cout << "Temps d'affichage de la liste : " << tempsaffliste << "s" <<endl;
+    cout << "Temps d'affichage du tableau : " << tempsafftab << "s" <<endl;
+
 
     cout << endl;
     cout << "Recherche d'une personne : " << endl;
     cout << endl; 
 
-    cout << "David est a la " << rechercheListe(personnetest2,liste) << " position"<<endl;
-
-    cout << endl;
-    cout << "Suppression de David" << endl;
-    cout << endl;
-
-    liste = supprimerListe(personnetest2,liste);
-
-    affichageListe(liste);
-
-    cout << endl;
-    cout << "Test des tableau : " << endl;
-    cout << endl;
-
-
-    cout << endl;
-    cout << "Recherche dans le tableau : " << endl;
-    cout << endl;
-
-    cout << "David est a la " << rechercheTab(personnetest2, tableau) << " position"<<endl;
-
-    cout << endl;
-    cout << "Suppression de David" << endl;
-    cout << endl;
-    
-    tableau = supprimerTab(personnetest2,tableau);
-
-    affichageTab(tableau);
-
-    // Mesure affichage liste
-    start = clock();
-    affichageListe(liste);
-    end = clock();
-    std::cout << "Temps affichage liste : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
-
-    // Mesure affichage tableau
-    start = clock();
-    affichageTab(tableau);
-    end = clock();
-    std::cout << "Temps affichage tableau : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
-
-    // Mesure recherche de 100 personnes
     start = clock();
     for(int i = 0; i < 100; i++) {
         personne p = genererPersonne();
         rechercheListe(p, liste);
     }
     end = clock();
-    std::cout << "Temps recherche 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+    cout << "Temps recherche 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << endl;
 
     start = clock();
     for(int i = 0; i < 100; i++) {
@@ -131,16 +133,19 @@ int main(){
         rechercheTab(p, tableau);
     }
     end = clock();
-    std::cout << "Temps recherche 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+    cout << "Temps recherche 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << endl;
 
-    // Mesure suppression de 100 personnes
+    cout << endl;
+    cout << "Suppression d'une de 100 personnes : " << endl;
+    cout << endl; 
+
     start = clock();
     for(int i = 0; i < 100; i++) {
         personne p = genererPersonne();
         liste = supprimerListe(p, liste);
     }
     end = clock();
-    std::cout << "Temps suppression 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+    cout << "Temps suppression 100 personnes (liste) : " << double(end - start) / CLOCKS_PER_SEC << " s" << endl;
 
     start = clock();
     for(int i = 0; i < 100; i++) {
@@ -148,6 +153,6 @@ int main(){
         tableau = supprimerTab(p, tableau);
     }
     end = clock();
-    std::cout << "Temps suppression 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << std::endl;
+    cout << "Temps suppression 100 personnes (tableau) : " << double(end - start) / CLOCKS_PER_SEC << " s" << endl;
 
 }

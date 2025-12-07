@@ -1,5 +1,5 @@
-#include "type_def.h"
-#include "utilitaire_generation.h"
+#include "../type_def.h"
+#include "../utilitaire_generation/utilitaire_generation.h"
 #include <iostream>
 using namespace std;
 
@@ -21,7 +21,7 @@ elementListe *creerElementListe(personne personne){
 }
 
 void affichagePersonne(personne personne){
-    cout << "[" + personne.nom + ", " << personne.prenom + ", "<< personne.tel << "]" << endl;
+    cout << "(" + personne.nom + ", " << personne.prenom + ", "<< personne.tel << "); " ;
 }
 
 bool egalitePersonne(personne personne1, personne personne2){

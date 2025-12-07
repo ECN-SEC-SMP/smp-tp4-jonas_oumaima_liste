@@ -7,7 +7,7 @@ CXXFLAGS := -Wall -Wextra -std=c++17 -O2
 TARGET := tp4_liste
 
 # Tous les .cpp du répertoire
-SRCS := $(wildcard *.cpp)
+SRCS := $(wildcard *.cpp) $(wildcard utilitaires/*.cpp) $(wildcard repertoire/*.cpp)  $(wildcard utilitaire_generation/*.cpp)
 OBJS := $(SRCS:.cpp=.o)
 
 .PHONY: all clean
